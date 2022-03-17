@@ -21,10 +21,11 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const router = useRouter();
   const [isMobile] = useMediaQuery('(max-width: 30em)');
   return (
     <>
@@ -65,6 +66,7 @@ const Header = () => {
                 colorScheme={'teal'}
                 size={'sm'}
                 mr={4}
+                onClick={() => router.push('/resume/add')}
                 leftIcon={<AddIcon />}>
                 New
               </Button>
