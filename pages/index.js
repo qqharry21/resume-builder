@@ -1,11 +1,12 @@
 /** @format */
 
-import { PersonDetail } from '../components';
+import { Meta } from '../components';
+import React, { useState } from 'react';
 
 export default function Home() {
   return (
     <>
-      <PersonDetail />
+      <Meta title='Home' />
     </>
   );
 }

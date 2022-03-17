@@ -12,7 +12,7 @@ const Meta = ({ title, keywords, description, image }) => {
       <meta name='description' content={description} />
       <meta property='og:title' content={title} />
       <meta property='og:type' content='website' />
-      <meta property='og:image' content={image ? image : '/logo.png'} />
+      <meta property='og:image' content={image ? image : '/favicon.ico'} />
       <meta property='og:description' content={description} />
       <meta property='og:site_name' content={title} />
       <meta property='og:url' content='' />
@@ -20,7 +20,7 @@ const Meta = ({ title, keywords, description, image }) => {
 
       <title>{title.includes('Resume Builder') ? title : title.concat(' | Resume Builder')}</title>
 
-      <link rel='icon' href='/logo.png' />
+      <link rel='icon' href='/favicon.ico' />
     </Head>
   );
 };
