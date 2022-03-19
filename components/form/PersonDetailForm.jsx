@@ -22,24 +22,25 @@ import {
   RiPhoneLine,
 } from 'react-icons/ri';
 import { MdOutlineEmail, MdWebAsset } from 'react-icons/md';
-import { personalSchema } from '../../utils/validate';
-import { Form } from '.';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '../../utils/animate';
 const PersonDetailForm = () => {
+  const MotionSimpleGrid = motion(SimpleGrid);
   return (
-    <Form validationSchema={personalSchema}>
-      <SimpleGrid columns={[1, 2]} spacingX='40px' spacingY='20px'>
+    <>
+      <MotionSimpleGrid
+        columns={[1, 2]}
+        spacingX='40px'
+        spacingY='20px'
+        variants={fadeInUp}
+        initial='initial'
+        animate='animate'>
         {/* First Name */}
         <Field name='firstName'>
           {({ field, form }) => (
             <FormControl isInvalid={form.errors.firstName && form.touched.firstName} isRequired>
               <FormLabel htmlFor='first-name'>First Name</FormLabel>
-              <Input
-                {...field}
-                id='first-name'
-                placeholder='First Name'
-                isRequired={true}
-                autoComplete='off'
-              />
+              <Input {...field} id='first-name' placeholder='First Name' autoComplete='off' />
               <FormErrorMessage>{form.errors.firstName}</FormErrorMessage>
             </FormControl>
           )}
@@ -49,13 +50,7 @@ const PersonDetailForm = () => {
           {({ field, form }) => (
             <FormControl isInvalid={form.errors.lastName && form.touched.lastName} isRequired>
               <FormLabel htmlFor='last-name'>Last Name</FormLabel>
-              <Input
-                {...field}
-                id='last-name'
-                placeholder='Last Name'
-                isRequired={true}
-                autoComplete='off'
-              />
+              <Input {...field} id='last-name' placeholder='Last Name' autoComplete='off' />
               <FormErrorMessage>{form.errors.lastName}</FormErrorMessage>
             </FormControl>
           )}
@@ -66,13 +61,7 @@ const PersonDetailForm = () => {
             <FormControl isInvalid={form.errors.email && form.touched.email} isRequired>
               <FormLabel htmlFor='email'>Email</FormLabel>
               <InputGroup>
-                <Input
-                  {...field}
-                  id='email'
-                  placeholder='Email'
-                  isRequired={true}
-                  autoComplete='off'
-                />
+                <Input {...field} id='email' placeholder='Email' autoComplete='off' />
                 <InputRightElement
                   pointerEvents='none'
                   children={<Icon as={MdOutlineEmail} w={5} h={5} />}
@@ -92,7 +81,6 @@ const PersonDetailForm = () => {
                   {...field}
                   type='tel'
                   id='phone'
-                  isRequired={true}
                   placeholder='XXXX-XXX-XXX'
                   autoComplete='off'
                 />
@@ -178,7 +166,7 @@ const PersonDetailForm = () => {
                 <Input {...field} id='facebook' placeholder='Facebook' autoComplete='off' />
                 <InputRightElement
                   pointerEvents='none'
-                  children={<Icon as={RiFacebookBoxLine} w={5} h={5} />}
+                  children={<Icon as={RiFacebookBoxLine} w={5} h={5} color='teal' />}
                 />
               </InputGroup>
               <FormErrorMessage>{form.errors.facebook}</FormErrorMessage>
@@ -194,15 +182,15 @@ const PersonDetailForm = () => {
                 <Input {...field} id='instagram' placeholder='Instagram' autoComplete='off' />
                 <InputRightElement
                   pointerEvents='none'
-                  children={<Icon as={RiInstagramLine} w={5} h={5} />}
+                  children={<Icon as={RiInstagramLine} w={5} h={5} color='teal' />}
                 />
               </InputGroup>
               <FormErrorMessage>{form.errors.instagram}</FormErrorMessage>
             </FormControl>
           )}
         </Field>
-      </SimpleGrid>
-    </Form>
+      </MotionSimpleGrid>
+    </>
   );
 };
 
