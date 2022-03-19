@@ -2,7 +2,6 @@
 import { Box, Button, Center, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { Children, useState } from 'react';
-
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import { fadeInLeft, fadeInRight } from '../../utils/animate';

@@ -1,11 +1,6 @@
 /** @format */
 
-/* eslint-disable react/no-children-prop */
 import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
   Grid,
   GridItem,
   Box,
@@ -16,13 +11,13 @@ import {
   SimpleGrid,
   IconButton,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { Field, FieldArray, getIn } from 'formik';
+import React from 'react';
+import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { motion } from 'framer-motion';
 import { fadeInRight, fadeInUp } from '../../utils/animate';
 import { MdOutlinePlaylistAdd } from 'react-icons/md';
-
+import { InputField } from '.';
 const ProjectForm = () => {
   const MotionBox = motion(Box);
   const MotionBtn = motion(IconButton);
@@ -46,8 +41,6 @@ const ProjectForm = () => {
     <>
       <FieldArray name='project'>
         {({ push, remove, form }) => {
-          console.log('form', form.values);
-
           const length = form.values.project.length;
           return (
             <SimpleGrid spacing={6}>
@@ -80,7 +73,7 @@ const ProjectForm = () => {
                       <GridItem colSpan={2}>
                         <Field
                           name={`project[${index}].name`}
-                          component={InputFiled}
+                          component={InputField}
                           label='name'
                         />
                       </GridItem>
@@ -88,7 +81,7 @@ const ProjectForm = () => {
                       <GridItem colSpan={2}>
                         <Field
                           name={`project[${index}].link`}
-                          component={InputFiled}
+                          component={InputField}
                           label='link'
                         />
                       </GridItem>
@@ -96,7 +89,7 @@ const ProjectForm = () => {
                       <GridItem colSpan={4}>
                         <Field
                           name={`project[${index}].description`}
-                          component={InputFiled}
+                          component={InputField}
                           label='description'
                         />
                       </GridItem>
@@ -122,21 +115,6 @@ const ProjectForm = () => {
         }}
       </FieldArray>
     </>
-  );
-};
-
-const InputFiled = ({ field, form, label, isRequired }) => {
-  const error = getIn(form.errors, field.name);
-  const touch = getIn(form.touched, field.name);
-  return (
-    <FormControl isInvalid={error && touch} isRequired={isRequired}>
-      <FormLabel htmlFor={label} style={{ textTransform: 'capitalize' }}>
-        {label}
-      </FormLabel>
-      <Input {...field} id={label} />
-      <FormHelperText></FormHelperText>
-      <FormErrorMessage>{error}</FormErrorMessage>
-    </FormControl>
   );
 };
 

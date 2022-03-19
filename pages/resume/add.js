@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { Meta } from '../../components';
 import { AddForm, FormItem, PersonDetailForm, ProjectForm } from '../../components/form';
 import { personalSchema, projectSchema } from '../../utils/validate';
