@@ -34,25 +34,16 @@ export const personalSchema = yup.object().shape({
   linkedin: yup.string().url(),
   instagram: yup.string().url(),
 });
+
 export const projectSchema = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string().required('Last name is required'),
-  email: yup
-    .string()
-    .matches(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      'Format error'
+  project: yup
+    .array()
+    .of(
+      yup.object().shape({
+        name: yup.string().required('Project name is required'),
+        link: yup.string().url('Invalid url'),
+        description: yup.string().required('Description is required'),
+      })
     )
-    .required(),
-  phone: yup
-    .string()
-    .matches(phoneRegExp, 'Phone number is not valid')
-    .min(10, 'Phone must be at least 10 characters')
-    .required('Phone is required'),
-  website: yup.string().url(),
-  github: yup.string().url(),
-  facebook: yup.string().url(),
-  twitter: yup.string().url(),
-  linkedin: yup.string().url(),
-  instagram: yup.string().url(),
+    .min(1, 'At least one project is required'),
 });

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Meta } from '../../components';
-import { AddForm, Form, PersonDetailForm, ProjectForm } from '../../components/form';
+import { AddForm, FormItem, PersonDetailForm, ProjectForm } from '../../components/form';
 import { personalSchema, projectSchema } from '../../utils/validate';
 
 const AddPage = () => {
@@ -17,7 +17,7 @@ const AddPage = () => {
     twitter: '',
     facebook: '',
     instagram: '',
-    project: [{ id: 1, name: '', description: '', link: '' }],
+    project: [{ name: '', description: '', link: '' }],
   });
   return (
     <>
@@ -25,17 +25,18 @@ const AddPage = () => {
       <AddForm
         initialValues={formData}
         onSubmit={(values, actions) => {
+          console.log('submit', values);
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
           }, 1000);
         }}>
-        <Form validationSchema={personalSchema} title='Personal Detail'>
+        <FormItem validationSchema={personalSchema} label='Personal Detail'>
           <PersonDetailForm />
-        </Form>
-        <Form validationSchema={projectSchema} title='Project Developed'>
+        </FormItem>
+        <FormItem validationSchema={projectSchema} label='Project Developed'>
           <ProjectForm />
-        </Form>
+        </FormItem>
       </AddForm>
     </>
   );

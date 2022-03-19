@@ -1,94 +1,119 @@
 /** @format */
 
-/* eslint-disable react/no-children-prop */
 import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
   Grid,
   GridItem,
   Box,
   Heading,
+  Button,
+  FormHelperText,
+  HStack,
+  SimpleGrid,
+  IconButton,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { MdWebAsset } from 'react-icons/md';
+import React from 'react';
 import { Field, FieldArray } from 'formik';
+import { alert, success } from '../../services/notifyService';
+import { motion } from 'framer-motion';
+import { fadeInRight, fadeInUp } from '../../utils/animate';
+import { MdOutlinePlaylistAdd } from 'react-icons/md';
+import { InputField } from '.';
 const ProjectForm = () => {
-  const [currentId, setCurrentId] = useState(1);
-
-  // use FieldArray to handle multiple form fields
+  const MotionBox = motion(Box);
+  const MotionBtn = motion(IconButton);
+  const handleRemove = (index, length, push, remove) => {
+    if (length - 1 === 0) {
+      alert('At least one project');
+      push({ name: '', description: '', link: '' });
+    } else {
+      success(`Remove Project ${index + 1}`);
+    }
+    remove(index);
+  };
+  const handleAdd = push => {
+    push({ name: '', description: '', link: '' });
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 100);
+  };
 
   return (
     <>
-      <Box pb={4} align='center'>
-        <Heading size='md'>Project {currentId}</Heading>
-      </Box>
-      <Grid templateColumns='repeat(4,1fr)' gap={4}>
-        {/* First Name */}
-        <GridItem colSpan={2}>
-          <Field name='firstName'>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.firstName && form.touched.firstName} isRequired>
-                <FormLabel htmlFor='first-name'>Project Name</FormLabel>
-                <Input
-                  {...field}
-                  id='first-name'
-                  placeholder='First Name'
-                  isRequired={true}
-                  autoComplete='off'
-                />
-                <FormErrorMessage>{form.errors.firstName}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-        </GridItem>
-        {/* Last Name */}{' '}
-        <GridItem colSpan={2}>
-          <Field name='lastName'>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.lastName && form.touched.lastName} isRequired>
-                <FormLabel htmlFor='last-name'>Last Name</FormLabel>
-                <Input
-                  {...field}
-                  id='last-name'
-                  placeholder='Last Name'
-                  isRequired={true}
-                  autoComplete='off'
-                />
-                <FormErrorMessage>{form.errors.lastName}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-        </GridItem>
-        {/* Email */}{' '}
-        <GridItem colSpan={4}>
-          <Field name='email'>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.email && form.touched.email} isRequired>
-                <FormLabel htmlFor='email'>Email</FormLabel>
-                <InputGroup>
-                  <Input
-                    {...field}
-                    id='email'
-                    placeholder='Email'
-                    isRequired={true}
-                    autoComplete='off'
-                  />
-                  <InputRightElement
-                    pointerEvents='none'
-                    children={<Icon as={MdWebAsset} w={5} h={5} />}
-                  />
-                </InputGroup>
-                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-        </GridItem>
-      </Grid>
+      <FieldArray name='project'>
+        {({ push, remove, form }) => {
+          const length = form.values.project.length;
+          return (
+            <SimpleGrid spacing={6}>
+              {form.values.project.map((project, index) => {
+                return (
+                  <MotionBox
+                    key={index}
+                    px={10}
+                    pt={2}
+                    pb={8}
+                    boxShadow='md'
+                    rounded='md'
+                    variants={fadeInUp}
+                    initial='initial'
+                    exit='exit'
+                    animate='animate'>
+                    <HStack py={4} justify='space-between'>
+                      <Heading size='md'>Project {index + 1}</Heading>
+                      <Button
+                        type='button'
+                        colorScheme='teal'
+                        onClick={() => {
+                          handleRemove(index, length, push, remove);
+                        }}>
+                        Remove
+                      </Button>
+                    </HStack>
+                    <Grid templateColumns='repeat(4,1fr)' gap={4}>
+                      {/* Project Name */}
+                      <GridItem colSpan={2}>
+                        <Field
+                          name={`project[${index}].name`}
+                          component={InputField}
+                          label='name'
+                        />
+                      </GridItem>
+                      {/* Project Link */}
+                      <GridItem colSpan={2}>
+                        <Field
+                          name={`project[${index}].link`}
+                          component={InputField}
+                          label='link'
+                        />
+                      </GridItem>
+                      {/* Project Description */}
+                      <GridItem colSpan={4}>
+                        <Field
+                          name={`project[${index}].description`}
+                          component={InputField}
+                          label='description'
+                        />
+                      </GridItem>
+                    </Grid>
+                  </MotionBox>
+                );
+              })}
+              <MotionBtn
+                variant='solid'
+                colorScheme={'teal'}
+                aria-label='Add project'
+                variants={fadeInRight}
+                initial='initial'
+                exit='exit'
+                animate='animate'
+                style={{ position: 'fixed', left: '1rem', top: '21vh' }}
+                icon={<MdOutlinePlaylistAdd size={22} />}
+                onClick={() => {
+                  handleAdd(push);
+                }}></MotionBtn>
+            </SimpleGrid>
+          );
+        }}
+      </FieldArray>
     </>
   );
 };

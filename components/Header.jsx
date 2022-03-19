@@ -41,9 +41,13 @@ const Header = () => {
           <HStack spacing={8} alignItems={'center'}>
             <Box>
               {isMobile ? (
-                <Heading size='xl'>Resume</Heading>
+                <Heading size='xl' colorScheme='teal'>
+                  Resume
+                </Heading>
               ) : (
-                <Heading size='lg'>Resume Builder</Heading>
+                <Heading size='lg' colorScheme='teal'>
+                  Resume Builder
+                </Heading>
               )}
             </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
@@ -55,14 +59,16 @@ const Header = () => {
           <Flex alignItems={'center'}>
             {isMobile ? (
               <IconButton
-                variant={'solid'}
+                variant={'outline'}
+                aria-label='Add New Resume'
                 colorScheme={'teal'}
                 size={'sm'}
                 mr={2}
                 icon={<AddIcon />}></IconButton>
             ) : (
               <Button
-                variant={'solid'}
+                variant={'outline'}
+                aria-label='Add New Resume'
                 colorScheme={'teal'}
                 size={'sm'}
                 mr={4}
@@ -101,8 +107,6 @@ const Header = () => {
           </Box>
         ) : null}
       </Box>
-
-      {/* <Box p={4}>Main Content Here</Box> */}
     </>
   );
 };
