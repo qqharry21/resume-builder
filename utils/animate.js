@@ -5,7 +5,7 @@ export const fadeInUp = {
     opacity: 0,
     y: -30,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: 'easeInOut',
     },
   },
@@ -13,14 +13,14 @@ export const fadeInUp = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: 'easeInOut',
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: 'easeInOut',
     },
   },
@@ -35,7 +35,7 @@ export const fadeInLeft = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.1,
       ease: 'easeInOut',
     },
   },
@@ -50,7 +50,27 @@ export const fadeInRight = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.1,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+export const show = {
+  initial: {
+    opacity: 0.5,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      ease: 'easeInOut',
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.1,
       ease: 'easeInOut',
     },
   },

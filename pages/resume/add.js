@@ -1,24 +1,11 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Meta } from '../../components';
 import { AddForm, FormItem, PersonDetailForm, ProjectForm } from '../../components/form';
 import { personalSchema, projectSchema } from '../../utils/validate';
 
 const AddPage = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    website: '',
-    github: '',
-    linkedIn: '',
-    twitter: '',
-    facebook: '',
-    instagram: '',
-    project: [{ name: '', description: '', link: '' }],
-  });
   return (
     <>
       <Meta title='Add' />
@@ -37,9 +24,26 @@ const AddPage = () => {
         <FormItem validationSchema={projectSchema} label='Project Developed'>
           <ProjectForm />
         </FormItem>
+        <FormItem validationSchema={projectSchema} label='Experiences'>
+          <ProjectForm />
+        </FormItem>
       </AddForm>
     </>
   );
+};
+
+const formData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  website: '',
+  github: '',
+  linkedIn: '',
+  twitter: '',
+  facebook: '',
+  instagram: '',
+  project: [{ name: '', description: '', link: '' }],
 };
 
 export default AddPage;

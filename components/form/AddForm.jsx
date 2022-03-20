@@ -1,10 +1,10 @@
 /** @format */
-import { Box, Button, Center, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
+import { Box, Center, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { Children, useState } from 'react';
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { motion } from 'framer-motion';
+import { ArrowBackIcon, ArrowForwardIcon } from '../icon';
 import { fadeInLeft, fadeInRight } from '../../utils/animate';
+import { Button, MotionBox } from '../motion';
 const AddForm = ({ children, ...props }) => {
   const childrenArray = Children.toArray(children);
   const [step, setStep] = useState(0);
@@ -20,8 +20,6 @@ const AddForm = ({ children, ...props }) => {
       setStep(s => s + 1);
     }
   };
-  const MotionBox = motion(Box);
-  const MotionBtn = motion(Button);
   return (
     <Box p={6}>
       <Flex justify='center' align='center' direction='column'>
@@ -39,7 +37,7 @@ const AddForm = ({ children, ...props }) => {
         </MotionBox>
         <Divider />
         {/* Form */}
-        <Box px={8} py={4} w='90%' borderRadius='5px'>
+        <Box px={{ lg: 8, md: 0 }} py={4} w={{ lg: '90%', md: '100%' }} borderRadius='5px'>
           <Formik
             {...props}
             validationSchema={currentChild.props.validationSchema}
@@ -50,25 +48,16 @@ const AddForm = ({ children, ...props }) => {
               <Center>
                 <Stack p={8} direction={['column', 'row']} spacing='15px'>
                   {step !== 0 && (
-                    <MotionBtn
+                    <Button
                       leftIcon={<ArrowBackIcon />}
                       onClick={() => setStep(s => s - 1)}
-                      variants={fadeInLeft}
-                      initial='initial'
-                      exit='exit'
-                      animate='animate'>
+                      variants={fadeInLeft}>
                       Back
-                    </MotionBtn>
+                    </Button>
                   )}
-                  <MotionBtn
-                    rightIcon={<ArrowForwardIcon />}
-                    type='submit'
-                    variants={fadeInRight}
-                    initial='initial'
-                    exit='exit'
-                    animate='animate'>
+                  <Button rightIcon={<ArrowForwardIcon />} type='submit' variants={fadeInRight}>
                     {isLastStep() ? 'Submit' : 'Next'}
-                  </MotionBtn>
+                  </Button>
                 </Stack>
               </Center>
             </Form>

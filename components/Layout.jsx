@@ -4,7 +4,6 @@ import { Container } from '@chakra-ui/react';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import Header from './Header';
-
 const Layout = ({ children }) => {
   return (
     <>
