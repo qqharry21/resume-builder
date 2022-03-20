@@ -44,6 +44,7 @@ const formData = {
   facebook: '',
   instagram: '',
   project: [{ name: '', description: '', link: '' }],
+  experience: [{ company: '', position: '', startDate: '', endDate: '', description: '' }],
 };
 
 export default AddPage;

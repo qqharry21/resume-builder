@@ -16,15 +16,6 @@ export const Button = ({ children, ...props }) => {
   );
 };
 
-// export const MotionBox = ({ children, ...props }) => {
-//   const MotionBox = motion(Box);
-//   return (
-//     <MotionBox {...props} initial='initial' animate='animate'>
-//       {children}
-//     </MotionBox>
-//   );
-// };
-
 export const IconButton = ({ children, ...props }) => {
   const MotionIconBtn = motion(IconBtn);
   return (
@@ -38,3 +29,12 @@ export const IconButton = ({ children, ...props }) => {
     </MotionIconBtn>
   );
 };
+
+// export const MotionBox = ({ children, ...props }) => {
+//   const MotionBox = motion(Box);
+//   return (
+//     <MotionBox {...props} initial='initial' animate='animate'>
+//       {children}
+//     </MotionBox>
+//   );
+// };

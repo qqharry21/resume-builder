@@ -17,7 +17,7 @@ import { CgPlayListAdd, CgPlayListRemove } from '../icon';
 import { InputField } from '.';
 import { MotionBox, IconButton } from '../motion';
 import { DeleteIcon } from '../icon';
-const ProjectForm = () => {
+const ExperienceForm = () => {
   const [isMobile] = useMediaQuery('(max-width: 30em)');
   const handleRemove = (index, length, push, remove) => {
     if (length - 1 === 0) {
@@ -89,7 +89,7 @@ const ProjectForm = () => {
                           name={`project[${index}].name`}
                           component={InputField}
                           label='name'
-                          isRequired
+                          isRequired={true}
                           placeholder='Project Name'
                         />
                       </GridItem>
@@ -108,7 +108,7 @@ const ProjectForm = () => {
                           name={`project[${index}].description`}
                           component={InputField}
                           label='description'
-                          isRequired
+                          isRequired={true}
                           placeholder='Project Description'
                         />
                       </GridItem>
@@ -137,4 +137,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+export default ExperienceForm;

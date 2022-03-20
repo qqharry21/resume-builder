@@ -5,6 +5,7 @@ import React, { Children, useState } from 'react';
 import { ArrowBackIcon, ArrowForwardIcon } from '../icon';
 import { fadeInLeft, fadeInRight } from '../../utils/animate';
 import { Button, MotionBox } from '../motion';
+
 const AddForm = ({ children, ...props }) => {
   const childrenArray = Children.toArray(children);
   const [step, setStep] = useState(0);

@@ -18,6 +18,7 @@ import {
   ArrowBackIcon,
   ArrowForwardIcon,
 } from '@chakra-ui/icons';
+
 export {
   RiInstagramLine,
   RiFacebookBoxLine,
