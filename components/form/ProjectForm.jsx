@@ -22,14 +22,14 @@ const ProjectForm = () => {
   const handleRemove = (index, length, push, remove) => {
     if (length - 1 === 0) {
       alert('At least one project');
-      push({ name: '', description: '', link: '' });
+      push(projectData);
     } else {
       success(`Remove Project ${index + 1}`);
     }
     remove(index);
   };
   const handleAdd = push => {
-    push({ name: '', description: '', link: '' });
+    push(projectData);
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 100);
@@ -63,7 +63,7 @@ const ProjectForm = () => {
                           colorScheme={'teal'}
                           aria-label='Remove project'
                           key='remove'
-                          icon={<CgPlayListRemove size={25} />}
+                          icon={<DeleteIcon size={25} />}
                           onClick={() => {
                             handleRemove(index, length, push, remove);
                           }}
@@ -136,5 +136,5 @@ const ProjectForm = () => {
     </>
   );
 };
-
+const projectData = { name: '', description: '', link: '' };
 export default ProjectForm;

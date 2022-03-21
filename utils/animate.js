@@ -58,7 +58,7 @@ export const fadeInRight = {
 
 export const show = {
   initial: {
-    opacity: 0.5,
+    opacity: 0,
   },
   animate: {
     opacity: 1,

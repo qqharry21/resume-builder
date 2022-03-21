@@ -8,41 +8,47 @@ import {
   HStack,
   SimpleGrid,
   useMediaQuery,
+  forwardRef,
+  Input,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, CgPlayListRemove } from '../icon';
-import { InputField } from '.';
+import { CgPlayListAdd, CgPlayListRemove, DeleteIcon, CalendarIcon } from '../icon';
+import { InputField, DateInputField } from '.';
 import { MotionBox, IconButton } from '../motion';
-import { DeleteIcon } from '../icon';
 const ExperienceForm = () => {
   const [isMobile] = useMediaQuery('(max-width: 30em)');
+  const [startDate, setStartDate] = useState(new Date());
   const handleRemove = (index, length, push, remove) => {
     if (length - 1 === 0) {
-      alert('At least one project');
-      push({ name: '', description: '', link: '' });
+      alert('At least one experience');
+      push(experience);
     } else {
-      success(`Remove Project ${index + 1}`);
+      success(`Remove Experience ${index + 1}`);
     }
     remove(index);
   };
   const handleAdd = push => {
-    push({ name: '', description: '', link: '' });
+    push(experience);
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 100);
   };
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <Input onClick={onClick} ref={ref} value={value} readOnly />
+  ));
 
   return (
     <>
-      <FieldArray name='project'>
+      <FieldArray name='experience'>
         {({ push, remove, form }) => {
-          const length = form.values.project.length;
+          const length = form.values.experience.length;
+          console.log(form);
           return (
             <SimpleGrid spacing={6}>
-              {form.values.project.map((project, index) => {
+              {form.values.experience.map((experience, index) => {
                 return (
                   <MotionBox
                     key={index}
@@ -56,14 +62,14 @@ const ExperienceForm = () => {
                     exit='exit'
                     animate='animate'>
                     <HStack py={4} justify='space-between'>
-                      <Heading size='md'>Project {index + 1}</Heading>
+                      <Heading size='md'>Experience {index + 1}</Heading>
                       {isMobile ? (
                         <IconButton
                           variant='ghost'
                           colorScheme={'teal'}
-                          aria-label='Remove project'
+                          aria-label='Remove experience'
                           key='remove'
-                          icon={<CgPlayListRemove size={25} />}
+                          icon={<DeleteIcon size={25} />}
                           onClick={() => {
                             handleRemove(index, length, push, remove);
                           }}
@@ -72,7 +78,7 @@ const ExperienceForm = () => {
                         <Button
                           type='button'
                           colorScheme='teal'
-                          aria-label='Remove project'
+                          aria-label='Remove experience'
                           p={[2, 4]}
                           leftIcon={<DeleteIcon />}
                           onClick={() => {
@@ -83,33 +89,45 @@ const ExperienceForm = () => {
                       )}
                     </HStack>
                     <Grid templateColumns='repeat(4,1fr)' gap={4}>
-                      {/* Project Name */}
+                      {/* Company Name */}
                       <GridItem colSpan={[4, 2]}>
                         <Field
-                          name={`project[${index}].name`}
+                          name={`experience[${index}].company`}
                           component={InputField}
-                          label='name'
+                          label='company'
                           isRequired={true}
-                          placeholder='Project Name'
+                          placeholder='Company Name'
                         />
                       </GridItem>
-                      {/* Project Link */}
+                      {/* Role */}
                       <GridItem colSpan={[4, 2]}>
                         <Field
-                          name={`project[${index}].link`}
+                          name={`experience[${index}].role`}
                           component={InputField}
-                          label='link'
-                          placeholder='Project Link'
+                          label='role'
+                          placeholder='Position'
                         />
                       </GridItem>
-                      {/* Project Description */}
+                      {/* Description */}
                       <GridItem colSpan={4}>
                         <Field
-                          name={`project[${index}].description`}
+                          name={`experience[${index}].description`}
                           component={InputField}
                           label='description'
                           isRequired={true}
-                          placeholder='Project Description'
+                          placeholder='Experience Description'
+                        />
+                      </GridItem>
+                      {/* Start Date */}
+                      <GridItem colSpan={[4, 2]}>
+                        <Field
+                          name={`experience[${index}].startDate`}
+                          label='start date'
+                          isRequired
+                          data={startDate}
+                          setData={setStartDate}
+                          component={DateInputField}
+                          icon={CalendarIcon}
                         />
                       </GridItem>
                     </Grid>
@@ -119,7 +137,7 @@ const ExperienceForm = () => {
               <IconButton
                 variant='solid'
                 colorScheme={'teal'}
-                aria-label='Add project'
+                aria-label='Add experience'
                 key='add'
                 size='md'
                 variants={show}
@@ -136,5 +154,7 @@ const ExperienceForm = () => {
     </>
   );
 };
+
+const experience = { company: '', role: '', startDate: '', endDate: '', description: '' };
 
 export default ExperienceForm;

@@ -56,11 +56,11 @@ const Header = () => {
           <Flex alignItems={'center'}>
             {isMobile ? (
               <IconButton
-                variant={'outline'}
+                variant='ghost'
                 aria-label='Add New Resume'
                 colorScheme={'teal'}
                 size={'sm'}
-                mr={2}
+                mr={4}
                 onClick={() => router.push('/resume/add')}
                 icon={<AddIcon />}></IconButton>
             ) : (

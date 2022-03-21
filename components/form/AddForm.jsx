@@ -1,9 +1,9 @@
 /** @format */
 import { Box, Center, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, useFormik } from 'formik';
 import React, { Children, useState } from 'react';
 import { ArrowBackIcon, ArrowForwardIcon } from '../icon';
-import { fadeInLeft, fadeInRight } from '../../utils/animate';
+import { fadeInLeft, fadeInRight, show } from '../../utils/animate';
 import { Button, MotionBox } from '../motion';
 
 const AddForm = ({ children, ...props }) => {
@@ -14,6 +14,11 @@ const AddForm = ({ children, ...props }) => {
     return step === childrenArray.length - 1;
   }
 
+  const formik = useFormik({
+    initialValues: props.initialValues,
+  });
+
+  // custom submit
   const handleSubmit = async (values, helpers) => {
     if (isLastStep()) {
       await props.onSubmit(values, helpers);
@@ -40,28 +45,48 @@ const AddForm = ({ children, ...props }) => {
         {/* Form */}
         <Box px={{ lg: 8, md: 0 }} py={4} w={{ lg: '90%', md: '100%' }} borderRadius='5px'>
           <Formik
-            {...props}
+            {...formik}
             validationSchema={currentChild.props.validationSchema}
             onSubmit={handleSubmit}>
-            <Form autoComplete='off'>
-              {currentChild}
-              {/* Step Button */}
-              <Center>
-                <Stack p={8} direction={['column', 'row']} spacing='15px'>
-                  {step !== 0 && (
-                    <Button
-                      leftIcon={<ArrowBackIcon />}
-                      onClick={() => setStep(s => s - 1)}
-                      variants={fadeInLeft}>
-                      Back
-                    </Button>
-                  )}
-                  <Button rightIcon={<ArrowForwardIcon />} type='submit' variants={fadeInRight}>
-                    {isLastStep() ? 'Submit' : 'Next'}
-                  </Button>
-                </Stack>
-              </Center>
-            </Form>
+            {({ handleReset, dirty, isSubmitting }) => {
+              return (
+                <Form autoComplete='off'>
+                  {currentChild}
+                  {/* Step Button */}
+                  <Center>
+                    <Stack p={8} direction={['column', 'row']} spacing='15px'>
+                      <Button
+                        type='button'
+                        onClick={() => {
+                          handleReset();
+                          setStep(0);
+                        }}
+                        disabled={!dirty || isSubmitting}
+                        // variants={show}
+                      >
+                        Reset
+                      </Button>
+                      {step !== 0 && (
+                        <Button
+                          leftIcon={<ArrowBackIcon />}
+                          onClick={() => setStep(s => s - 1)}
+                          // variants={fadeInLeft}
+                        >
+                          Back
+                        </Button>
+                      )}
+                      <Button
+                        rightIcon={<ArrowForwardIcon />}
+                        type='submit'
+                        // variants={fadeInRight}
+                      >
+                        {isLastStep() ? 'Submit' : 'Next'}
+                      </Button>
+                    </Stack>
+                  </Center>
+                </Form>
+              );
+            }}
           </Formik>
         </Box>
       </Flex>

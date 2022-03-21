@@ -17,6 +17,7 @@ import {
   DeleteIcon,
   ArrowBackIcon,
   ArrowForwardIcon,
+  CalendarIcon,
 } from '@chakra-ui/icons';
 
 export {
@@ -36,4 +37,5 @@ export {
   CloseIcon,
   AddIcon,
   DeleteIcon,
+  CalendarIcon,
 };

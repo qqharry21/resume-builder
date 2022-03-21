@@ -1,8 +1,15 @@
 /** @format */
 
+import { useFormik } from 'formik';
 import React from 'react';
 import { Meta } from '../../components';
-import { AddForm, FormItem, PersonDetailForm, ProjectForm } from '../../components/form';
+import {
+  AddForm,
+  ExperienceForm,
+  FormItem,
+  PersonDetailForm,
+  ProjectForm,
+} from '../../components/form';
 import { personalSchema, projectSchema } from '../../utils/validate';
 
 const AddPage = () => {
@@ -25,7 +32,7 @@ const AddPage = () => {
           <ProjectForm />
         </FormItem>
         <FormItem validationSchema={projectSchema} label='Experiences'>
-          <ProjectForm />
+          <ExperienceForm />
         </FormItem>
       </AddForm>
     </>
@@ -44,7 +51,7 @@ const formData = {
   facebook: '',
   instagram: '',
   project: [{ name: '', description: '', link: '' }],
-  experience: [{ company: '', position: '', startDate: '', endDate: '', description: '' }],
+  experience: [{ company: '', role: '', startDate: '', endDate: '', description: '' }],
 };
 
 export default AddPage;

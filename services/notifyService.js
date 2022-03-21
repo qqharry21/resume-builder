@@ -1,7 +1,7 @@
 /** @format */
 
 import { toast } from 'react-toastify';
-import { config } from '../utils/config/notifyConfig';
+import { config } from '../config/notifyConfig';
 
 const alert = message => {
   toast.error(message, {

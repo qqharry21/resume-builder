@@ -53,9 +53,9 @@ export const experienceSchema = yup.object().shape({
   experience: yup.array().of(
     yup.object().shape({
       company: yup.string().required('Company name is required'),
-      position: yup.string().required('Position is required'),
-      startDate: yup.date().required('Start date is required'),
-      endDate: yup.date().required('End date is required'),
+      role: yup.string().required('Role is required'),
+      startDate: yup.string().required('Start date is required'),
+      endDate: yup.string().required('End date is required'),
       description: yup.string().required('Description is required'),
     })
   ),

@@ -5,4 +5,4 @@ export { default as AddForm } from './AddForm';
 export { default as PersonDetailForm } from './PersonDetailForm';
 export { default as ProjectForm } from './ProjectForm';
 export { default as ExperienceForm } from './ExperienceForm';
-export { default as InputField } from './InputField';
+export { InputField, DateInputField } from './InputField';
