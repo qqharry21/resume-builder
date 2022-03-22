@@ -60,3 +60,14 @@ export const experienceSchema = yup.object().shape({
     })
   ),
 });
+
+export const skillSchema = yup.object().shape({
+  skill: yup
+    .array()
+    .of(
+      yup.object().shape({
+        name: yup.string().required('Skill name is required'),
+      })
+    )
+    .min(1, 'At least one skill is required'),
+});

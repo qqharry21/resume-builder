@@ -8,19 +8,18 @@ import {
   HStack,
   SimpleGrid,
   useMediaQuery,
-  forwardRef,
-  Input,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, CgPlayListRemove, DeleteIcon, CalendarIcon } from '../icon';
-import { InputField, DateInputField } from '.';
+import { CgPlayListAdd, DeleteIcon, CalendarIcon } from '../icon';
+import { InputField, DateInputField, TextAreaInput } from '.';
 import { MotionBox, IconButton } from '../motion';
 const ExperienceForm = () => {
   const [isMobile] = useMediaQuery('(max-width: 30em)');
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const handleRemove = (index, length, push, remove) => {
     if (length - 1 === 0) {
       alert('At least one experience');
@@ -36,16 +35,12 @@ const ExperienceForm = () => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 100);
   };
-  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <Input onClick={onClick} ref={ref} value={value} readOnly />
-  ));
 
   return (
     <>
       <FieldArray name='experience'>
         {({ push, remove, form }) => {
           const length = form.values.experience.length;
-          console.log(form);
           return (
             <SimpleGrid spacing={6}>
               {form.values.experience.map((experience, index) => {
@@ -95,7 +90,7 @@ const ExperienceForm = () => {
                           name={`experience[${index}].company`}
                           component={InputField}
                           label='company'
-                          isRequired={true}
+                          isRequired
                           placeholder='Company Name'
                         />
                       </GridItem>
@@ -105,17 +100,8 @@ const ExperienceForm = () => {
                           name={`experience[${index}].role`}
                           component={InputField}
                           label='role'
+                          isRequired
                           placeholder='Position'
-                        />
-                      </GridItem>
-                      {/* Description */}
-                      <GridItem colSpan={4}>
-                        <Field
-                          name={`experience[${index}].description`}
-                          component={InputField}
-                          label='description'
-                          isRequired={true}
-                          placeholder='Experience Description'
                         />
                       </GridItem>
                       {/* Start Date */}
@@ -126,8 +112,32 @@ const ExperienceForm = () => {
                           isRequired
                           data={startDate}
                           setData={setStartDate}
+                          maxDate={endDate}
                           component={DateInputField}
                           icon={CalendarIcon}
+                        />
+                      </GridItem>
+                      {/* End Date */}
+                      <GridItem colSpan={[4, 2]}>
+                        <Field
+                          name={`experience[${index}].endDate`}
+                          label='end date'
+                          isRequired
+                          data={endDate}
+                          setData={setEndDate}
+                          maxDate={new Date()}
+                          minDate={startDate}
+                          component={DateInputField}
+                          icon={CalendarIcon}
+                        />
+                      </GridItem>
+                      {/* Description */}
+                      <GridItem colSpan={4}>
+                        <Field
+                          name={`experience[${index}].description`}
+                          component={TextAreaInput}
+                          label='description'
+                          placeholder='Experience Description'
                         />
                       </GridItem>
                     </Grid>

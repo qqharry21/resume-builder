@@ -9,8 +9,9 @@ import {
   FormItem,
   PersonDetailForm,
   ProjectForm,
+  SkillForm,
 } from '../../components/form';
-import { personalSchema, projectSchema } from '../../utils/validate';
+import { personalSchema, projectSchema, experienceSchema, skillSchema } from '../../utils/validate';
 
 const AddPage = () => {
   return (
@@ -31,8 +32,11 @@ const AddPage = () => {
         <FormItem validationSchema={projectSchema} label='Project Developed'>
           <ProjectForm />
         </FormItem>
-        <FormItem validationSchema={projectSchema} label='Experiences'>
+        <FormItem validationSchema={experienceSchema} label='Experiences'>
           <ExperienceForm />
+        </FormItem>
+        <FormItem validationSchema={skillSchema} label='Skills'>
+          <SkillForm />
         </FormItem>
       </AddForm>
     </>
@@ -52,6 +56,7 @@ const formData = {
   instagram: '',
   project: [{ name: '', description: '', link: '' }],
   experience: [{ company: '', role: '', startDate: '', endDate: '', description: '' }],
+  skill: [{ name: '' }],
 };
 
 export default AddPage;

@@ -13,10 +13,9 @@ import React from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, CgPlayListRemove } from '../icon';
-import { InputField } from '.';
+import { CgPlayListAdd, DeleteIcon } from '../icon';
+import { InputField, TextAreaInput } from '.';
 import { MotionBox, IconButton } from '../motion';
-import { DeleteIcon } from '../icon';
 const ProjectForm = () => {
   const [isMobile] = useMediaQuery('(max-width: 30em)');
   const handleRemove = (index, length, push, remove) => {
@@ -106,7 +105,7 @@ const ProjectForm = () => {
                       <GridItem colSpan={4}>
                         <Field
                           name={`project[${index}].description`}
-                          component={InputField}
+                          component={TextAreaInput}
                           label='description'
                           isRequired
                           placeholder='Project Description'

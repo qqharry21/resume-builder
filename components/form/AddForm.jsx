@@ -43,7 +43,7 @@ const AddForm = ({ children, ...props }) => {
         </MotionBox>
         <Divider />
         {/* Form */}
-        <Box px={{ lg: 8, md: 0 }} py={4} w={{ lg: '90%', md: '100%' }} borderRadius='5px'>
+        <Box px={{ lg: 6, md: 0 }} py={4} w={{ lg: '90%', md: '100%' }} borderRadius='5px'>
           <Formik
             {...formik}
             validationSchema={currentChild.props.validationSchema}
