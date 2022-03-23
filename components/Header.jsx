@@ -1,6 +1,7 @@
 /** @format */
 
 import React from 'react';
+import NextLink from 'next/link';
 import {
   Box,
   Flex,
@@ -8,9 +9,8 @@ import {
   HStack,
   Link,
   Heading,
-  IconButton,
-  Button,
   Menu,
+  Button as Btn,
   MenuButton,
   MenuList,
   MenuItem,
@@ -20,8 +20,9 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, AddIcon } from '../icon';
 import { useRouter } from 'next/router';
+import { Button, IconButton } from './motion';
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,22 +34,18 @@ const Header = () => {
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon w={25} h={25} /> : <HamburgerIcon w={25} h={25} />}
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              {isMobile ? (
-                <Heading size='xl' colorScheme='teal'>
-                  Resume
+              <NextLink href='/' passHref>
+                <Heading size='lg' colorScheme='teal' cursor='pointer'>
+                  Resume {!isMobile && 'Builder'}
                 </Heading>
-              ) : (
-                <Heading size='lg' colorScheme='teal'>
-                  Resume Builder
-                </Heading>
-              )}
+              </NextLink>
             </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map(link => (
@@ -59,17 +56,26 @@ const Header = () => {
           <Flex alignItems={'center'}>
             {isMobile ? (
               <IconButton
-                variant={'outline'}
+                variant='ghost'
                 aria-label='Add New Resume'
                 colorScheme={'teal'}
                 size={'sm'}
-                mr={2}
+                mr={4}
+                onClick={() => router.push('/resume/add')}
                 icon={<AddIcon />}></IconButton>
             ) : (
               <Button
                 variant={'outline'}
                 aria-label='Add New Resume'
                 colorScheme={'teal'}
+                _hover={{
+                  bg: 'teal.500',
+                  color: 'white',
+                }}
+                _focus={{
+                  bg: 'teal.500',
+                  color: 'white',
+                }}
                 size={'sm'}
                 mr={4}
                 onClick={() => router.push('/resume/add')}
@@ -79,7 +85,7 @@ const Header = () => {
             )}
 
             <Menu>
-              <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
+              <MenuButton as={Btn} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
                 <Avatar
                   size={'sm'}
                   src={
@@ -118,7 +124,8 @@ const NavLink = ({ children }) => (
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      color: 'white',
+      bg: useColorModeValue('teal.500'),
     }}
     href={'#'}>
     {children}

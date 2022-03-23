@@ -1,17 +1,20 @@
 /** @format */
 
 import { ChakraProvider } from '@chakra-ui/react';
-import Layout from '../components/Layout';
+import { AnimateSharedLayout } from 'framer-motion';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { AnimateSharedLayout } from 'framer-motion';
+import 'react-datepicker/dist/react-datepicker.css';
+import dynamic from 'next/dynamic';
+
+const DynamicLayout = dynamic(() => import('../components/Layout'), { ssr: false });
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
       <AnimateSharedLayout type='crossfade'>
-        <Layout>
+        <DynamicLayout>
           <Component {...pageProps} />
-        </Layout>
+        </DynamicLayout>
       </AnimateSharedLayout>
     </ChakraProvider>
   );

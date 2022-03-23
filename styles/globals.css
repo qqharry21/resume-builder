@@ -23,3 +23,7 @@ button:focus {
   scroll-behavior: smooth;
   /* box-shadow: none !important; */
 }
+
+.react-datepicker-popper {
+  z-index: 3 !important;
+}

@@ -9,6 +9,7 @@ setLocale({
     max: ({ max }) => `Must be at most ${max}`,
   },
 });
+
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -46,4 +47,27 @@ export const projectSchema = yup.object().shape({
       })
     )
     .min(1, 'At least one project is required'),
+});
+
+export const experienceSchema = yup.object().shape({
+  experience: yup.array().of(
+    yup.object().shape({
+      company: yup.string().required('Company name is required'),
+      role: yup.string().required('Role is required'),
+      startDate: yup.string().required('Start date is required'),
+      endDate: yup.string().required('End date is required'),
+      description: yup.string().required('Description is required'),
+    })
+  ),
+});
+
+export const skillSchema = yup.object().shape({
+  skill: yup
+    .array()
+    .of(
+      yup.object().shape({
+        name: yup.string().required('Skill name is required'),
+      })
+    )
+    .min(1, 'At least one skill is required'),
 });
