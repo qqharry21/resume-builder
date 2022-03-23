@@ -20,7 +20,7 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from './icon';
+import { HamburgerIcon, CloseIcon, AddIcon } from '../icon';
 import { useRouter } from 'next/router';
 import { Button, IconButton } from './motion';
 

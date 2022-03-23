@@ -11,7 +11,7 @@ import {
   RiPhoneLine,
   MdOutlineEmail,
   MdWebAsset,
-} from '../icon';
+} from '../../icon';
 import { InputField } from '.';
 import { fadeInUp } from '../../utils/animate';
 import { MotionSimpleGrid } from '../motion';

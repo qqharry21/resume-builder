@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, DeleteIcon, CalendarIcon } from '../icon';
+import { CgPlayListAdd, DeleteIcon, CalendarIcon } from '../../icon';
 import { InputField, DateInputField, TextAreaInput } from '.';
 import { MotionBox, IconButton } from '../motion';
 const ExperienceForm = () => {

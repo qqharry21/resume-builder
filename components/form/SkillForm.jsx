@@ -1,23 +1,13 @@
 /** @format */
 
-import {
-  Grid,
-  GridItem,
-  Heading,
-  Button,
-  HStack,
-  SimpleGrid,
-  useMediaQuery,
-  Wrap,
-  WrapItem,
-} from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { GridItem, HStack, Wrap, WrapItem } from '@chakra-ui/react';
+import React from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
-import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, DeleteIcon, CalendarIcon } from '../icon';
-import { InputField, DateInputField, TextAreaInput } from '.';
-import { MotionBox, IconButton } from '../motion';
+import { fadeInUp } from '../../utils/animate';
+import { CgPlayListAdd, DeleteIcon } from '../../icon';
+import { InputField } from '.';
+import { IconButton } from '../motion';
 import { motion } from 'framer-motion';
 const SkillForm = () => {
   const handleRemove = (index, length, push, remove) => {

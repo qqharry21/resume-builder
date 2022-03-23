@@ -13,7 +13,7 @@ import React from 'react';
 import { Field, FieldArray } from 'formik';
 import { alert, success } from '../../services/notifyService';
 import { fadeInUp, show } from '../../utils/animate';
-import { CgPlayListAdd, DeleteIcon } from '../icon';
+import { CgPlayListAdd, DeleteIcon } from '../../icon';
 import { InputField, TextAreaInput } from '.';
 import { MotionBox, IconButton } from '../motion';
 const ProjectForm = () => {

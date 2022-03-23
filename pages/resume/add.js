@@ -1,6 +1,4 @@
 /** @format */
-
-import { useFormik } from 'formik';
 import React from 'react';
 import { Meta } from '../../components';
 import {
@@ -11,6 +9,7 @@ import {
   ProjectForm,
   SkillForm,
 } from '../../components/form';
+import { success } from '../../services/notifyService';
 import { personalSchema, projectSchema, experienceSchema, skillSchema } from '../../utils/validate';
 
 const AddPage = () => {
@@ -20,11 +19,8 @@ const AddPage = () => {
       <AddForm
         initialValues={formData}
         onSubmit={(values, actions) => {
-          console.log('submit', values);
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }, 1000);
+          actions.setSubmitting(false);
+          success('Successfully added');
         }}>
         <FormItem validationSchema={personalSchema} label='Personal Detail'>
           <PersonDetailForm />
