@@ -14,7 +14,6 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@react-pdf/renderer": "^2.1.1",
-    "chakra-ui-steps": "^1.6.2",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.8",
     "next": "12.1.0",
