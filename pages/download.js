@@ -19,18 +19,32 @@ const DownloadPage = () => {
   return (
     <>
       <Meta title='Download' />
-      {/* <div className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.leftContainer}>
-          <div className={styles.image}>1</div>
+          <img className={styles.img} src='/photo.png' alt='photo' />
+
           <div className={styles.contactWrapper}>
+            <div className={styles.contactTitle}>Contact</div>
+            <hr className={styles.divider}></hr>
             <div className={styles.contact}>
               <div className={styles.contactIcon}>&</div>
               <div className={styles.contactText}>test@mail.com</div>
             </div>
+            <div className={styles.contact}>
+              <div className={styles.contactIcon}>&</div>
+              <div className={styles.contactText}>0916809268</div>
+            </div>
+          </div>
+
+          <div className={styles.skillWrapper}>
+            <div className={styles.skillTitle}>Skills</div> <hr className={styles.divider}></hr>
+            <div className={styles.skill}>
+              <div className={styles.skillText}>React</div>
+            </div>
           </div>
         </div>
         <div className={styles.rightContainer}></div>
-      </div> */}
+      </div>
       <Box>
         <HStack spacing={4}>
           {/* <PDFDownloadLink document={<PdfFile data={data} />} fileName={`Resume - ${date}`}>
